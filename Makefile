@@ -11,12 +11,10 @@ MKLFS           = dramfs_mklfs 128 64
 
 all: $(addsuffix .riscv, $(BP_DEMOS))
 
-%.riscv:
-	$(RISCV_GCC) -o $@ $(wildcard src/$*/*.c) $(RISCV_GCC_OPTS) $(RISCV_LINK_OPTS)
+%.riscv: $(BP_SDK_DIR)/perch/start.S
+	$(RISCV_GCC) -o $@ $< -D_DRAMFS $(wildcard src/$*/*.c) $(RISCV_GCC_OPTS) $(RISCV_LINK_OPTS)
 
-lfs_demo.riscv: $(BP_SDK_DIR)/perch/start.S ./src/lfs_demo/lfs.c ./src/lfs_demo/main.c
-	$(RISCV_GCC) -o $@ $^ -D_DRAMFS $(RISCV_GCC_OPTS) $(RISCV_LINK_OPTS)
-
+# target_input_files defined in Makefile.frag
 src/%/lfs.c:
 	cd $(dir $@); \
 		$(MKLFS) $($(addsuffix _input_files, $*)) > $(notdir $@)
