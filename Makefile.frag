@@ -1,4 +1,5 @@
 BP_DEMOS = \
+  eth_plic_demo \
   sample   \
   lfs_demo \
   terminal \
