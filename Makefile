@@ -11,6 +11,10 @@ MKLFS           = dramfs_mklfs 128 64
 
 all: $(addsuffix .riscv, $(BP_DEMOS))
 
+tcp_server.riscv tcp_client.riscv ssl_server.riscv ssl_client.riscv:
+	$(MAKE) $@ -C ./src/tcp_ssl
+	cp ./src/tcp_ssl/build/$@ $@
+
 %.riscv:
 	$(RISCV_GCC) -o $@ $(wildcard src/$*/*.c) $(RISCV_GCC_OPTS) $(RISCV_LINK_OPTS)
 
