@@ -1,0 +1,2 @@
+py/ contains TCP/SSL programs that can test the TCP/SSL connection to BP with Ethernet.
+ssl_gen/ contains a Makefile that makes all necessary SSL data.

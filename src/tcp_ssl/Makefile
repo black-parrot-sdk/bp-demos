@@ -3,7 +3,7 @@
 
 BUILD_DIR ?= build
 TOOL_DIR ?= ./tool
-PORT ?= interrupt
+PORT ?= polling
 
 CC := $(CROSS_COMPILE)gcc
 
@@ -17,6 +17,7 @@ COMMON_SRC         := ./common/ethernet_driver/ethernet_driver.c    \
 
 LWIP_SERVER_SRC    := $(COMMON_SRC) ./common/lwip_server.c ./tcp/tcp_server.c
 LWIP_CLIENT_SRC    := $(COMMON_SRC) ./common/lwip_client.c ./tcp/tcp_client.c
+TIME_SRC           := ./common/time.c
 WOLFSSL_SERVER_SRC := $(COMMON_SRC) ./common/lwip_server.c ./ssl/ssl_server.c
 WOLFSSL_CLIENT_SRC := $(COMMON_SRC) ./common/lwip_client.c ./ssl/ssl_client.c
 
@@ -40,10 +41,10 @@ tcp_client.riscv: $(LWIP_CLIENT_SRC) | $(BUILD_DIR)
 	$(CC) $(CFLAGS) $(LWIP_CLIENT_SRC) $(LINK_OPTS) -o $(BUILD_DIR)/$@
 
 ssl_server.riscv: $(WOLFSSL_SERVER_SRC) | $(BUILD_DIR)
-	$(CC) $(CFLAGS) $(WOLFSSL_SERVER_SRC) -lwolfssl $(LINK_OPTS) -o $(BUILD_DIR)/$@
+	$(CC) $(CFLAGS) $(WOLFSSL_SERVER_SRC) -lwolfssl $(TIME_SRC) $(LINK_OPTS) -o $(BUILD_DIR)/$@
 
 ssl_client.riscv: $(WOLFSSL_CLIENT_SRC) | $(BUILD_DIR)
-	$(CC) $(CFLAGS) $(WOLFSSL_CLIENT_SRC) -lwolfssl $(LINK_OPTS) -o $(BUILD_DIR)/$@
+	$(CC) $(CFLAGS) $(WOLFSSL_CLIENT_SRC) -lwolfssl $(TIME_SRC) $(LINK_OPTS) -o $(BUILD_DIR)/$@
 
 $(BUILD_DIR):
 	mkdir -p $@

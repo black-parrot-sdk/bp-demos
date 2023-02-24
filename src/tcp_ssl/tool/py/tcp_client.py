@@ -4,7 +4,7 @@ import socket
 import time
 
 # Specify the server address and port here:
-HOST = '192.168.0.141'
+HOST = ''
 PORT = 12345
 
 

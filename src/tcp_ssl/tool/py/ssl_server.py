@@ -8,10 +8,15 @@ import time
 HOST = ''
 PORT = 12345
 
+SSL_DATA_DIR = '../../ssl_data/'
+
+SERVER_CERTIFICATE = SSL_DATA_DIR + 'server_cert.pem'
+SERVER_PRIVATE_KEY = SSL_DATA_DIR + 'server_private_key.pem'
+
 context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
 context.check_hostname = False
 # load server certificate and its private key:
-context.load_cert_chain('../ssl_cert_build/ssl_cert_gen/server_cert.pem', '../ssl_cert_build/ssl_cert_gen/server_private_key.pem')
+context.load_cert_chain(SERVER_CERTIFICATE, SERVER_PRIVATE_KEY)
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM, 0) as sock:
     sock.bind((HOST, PORT))
