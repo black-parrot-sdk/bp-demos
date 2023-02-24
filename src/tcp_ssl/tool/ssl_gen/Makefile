@@ -16,7 +16,7 @@
 # ca_csr.conf:         config file for creating CA CSR
 # server_csr.conf:     config file for creating server CSR
 
-INSTALL_DIR := ./ssl_cert_build
+INSTALL_DIR := ../../
 
 all: my_certs_test.h;
 
@@ -41,6 +41,7 @@ ca_bundle.pem:
 	cat ca_cert.pem >> $@
 
 install:
-	cp ca_bundle.pem server_cert.pem server_private_key.pem my_certs_test.h $(INSTALL_DIR)/
+	cp ca_bundle.pem server_cert.pem server_private_key.pem $(INSTALL_DIR)/ssl_data
+	cp my_certs_test.h $(INSTALL_DIR)/include
 clean:
 	rm -f *.csr *.pem my_certs_test.h *.srl
