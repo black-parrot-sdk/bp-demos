@@ -2,7 +2,7 @@
 include Makefile.frag
 
 RISCV_GCC       = $(CROSS_COMPILE)gcc
-RISCV_GCC_OPTS  = -march=rv64imafd -mabi=lp64 -mcmodel=medany -I $(BP_SDK_INCLUDE_DIR)
+RISCV_GCC_OPTS  = -march=rv64imafdc -mabi=lp64d -mcmodel=medany -I $(BP_SDK_INCLUDE_DIR)
 RISCV_LINK_OPTS = -T $(BP_SDK_LINKER_DIR)/riscv.ld -L$(BP_SDK_LIB_DIR) -Wl,--whole-archive -lperch -Wl,--no-whole-archive
 MKLFS           = dramfs_mklfs 128 64
 
