@@ -4,7 +4,7 @@ include Makefile.frag
 RISCV_GCC       = $(CROSS_COMPILE)gcc
 RISCV_GCC_OPTS = -march=rv64gc -mabi=lp64d --specs=dramfs.specs --specs=perch.specs
 
-MKLFS           = dramfs_mklfs 128 64
+MKLFS           = riscv64-unknown-elf-dramfs_mklfs 128 64
 
 .PHONY: all
 
